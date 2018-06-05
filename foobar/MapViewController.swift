@@ -13,7 +13,9 @@ class MapViewController: UIViewController,CLLocationManagerDelegate {
 
     let locManger = CLLocationManager()
     var cords: MKCoordinateRegion!
-    let regionRadius: CLLocationDistance = 1
+    var followUser = false
+    var setLocation = false
+    let regionRadius: CLLocationDistance = 5000
     @IBOutlet weak var Map: MKMapView!
    
     override func viewDidLoad() {
@@ -37,7 +39,10 @@ class MapViewController: UIViewController,CLLocationManagerDelegate {
         Map.setRegion(coordinateRegion, animated: true)
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        centerMapOnLocation(location: locations[0])
+        if (followUser || !setLocation){
+            centerMapOnLocation(location: locations[0])
+            setLocation = true
+        }
     }
     
 }
