@@ -1,95 +1,81 @@
 //
-//  TableViewController.swift
-//  foobar
+//  ListViewController.swift
+//  covfefeRate
 //
-//  Created by Garrett Battaglia on 6/5/18.
+//  Created by Garrett Battaglia on 3/7/18.
 //  Copyright © 2018 Garrett Battaglia. All rights reserved.
 //
 
 import UIKit
 
-class TableViewController: UITableViewController {
-
+class ListViewController: UITableViewController {
+    
+    @IBOutlet var tabelVire: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.register(ShopTableViewCell.self, forCellReuseIdentifier: "ShopTableViewCell")
+        self.tableView.dataSource = self
+        // loadShops()
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
+    
+    /*func loadShops(){
+        let api = APIconnector.init(url:"http://138.197.200.59/api/listCoffee")
+        _arr = api.getArray()as! [NSDictionary]
+        
+        /* for obj in arr {
+         let name = obj.value(forKey: "name") as! String
+         let lat = obj.value(forKey: "lat") as! Double
+         let long = obj.value(forKey: "long") as! Double
+         }*/
+        
+        
+    }*/
+    
+      //MARK: - Table view data source
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
-
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1 /*_arr.count*/
     }
-
-    /*
+    
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        let cellIdentifier = "ShopTableViewCell"
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ShopTableViewCell  else {
+            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+        }
+ 
+        let name = "foo" //_arr[indexPath.row].value(forKey: "name") as! String
+        let lat = 0.0//_arr[indexPath.row].value(forKey: "lat") as! Double
+        let long = 0.0//_arr[indexPath.row].value(forKey: "long") as! Double
+        let rating = 3//_arr[indexPath.row].value(forKey: "rating") as! Int
+        
+        if cell.name == nil {
+            fatalError("This is null but shouldn't. why is it null.")
+        }
+        cell.name.text = name
+        
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
+    
+    
+    
 }
+
+
